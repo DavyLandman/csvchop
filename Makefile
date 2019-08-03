@@ -72,7 +72,7 @@ bin/csvawk: $(CSV_AWK_FILES) Makefile bin/
 
 csvgrep: bin/csvgrep
 bin/csvgrep: $(CSV_GREP_FILES) Makefile bin/
-	$(CC) -o $@ $(LinkFlags) `pcre-config --libs` $(CFLAGS) `pcre-config --cflags` $(CSV_GREP_FILES) 
+	$(CC) -o $@ $(LinkFlags) $(CFLAGS) `pcre-config --cflags` $(CSV_GREP_FILES) `pcre-config --libs`
 
 bin/csvtokenizercounts: $(CSV_TOK_TEST_COUNT_FILES) Makefile bin/
 	$(CC) -o $@ $(LinkFlags) $(CFLAGS) $(CSV_TOK_TEST_COUNT_FILES)
@@ -122,11 +122,11 @@ test-all-sizes-ci:
 prefix=/usr/local
     
 install: all
-	install -m 0755 bin/csvcut $(prefix)/bin/csvcut
-	install -m 0755 bin/csvgrep $(prefix)/bin/csvgrep
-	install -m 0755 bin/csvawk $(prefix)/bin/csvawk
-	install -m 0755 bin/csvpipe $(prefix)/bin/csvpipe
-	install -m 0755 bin/csvunpipe $(prefix)/bin/csvunpipe
+	install -m 0755 bin/csvcut $(DESTDIR)$(prefix)/bin/csvcut
+	install -m 0755 bin/csvgrep $(DESTDIR)$(prefix)/bin/csvgrep
+	install -m 0755 bin/csvawk $(DESTDIR)$(prefix)/bin/csvawk
+	install -m 0755 bin/csvpipe $(DESTDIR)$(prefix)/bin/csvpipe
+	install -m 0755 bin/csvunpipe $(DESTDIR)$(prefix)/bin/csvunpipe
 
 clean:
 	rm -rf bin/*
